@@ -547,15 +547,15 @@ footer .about{color:var(--foot-muted);max-width:21rem}
   var TYPES={hoodies:'Hoodies',sweatshirts:'Sweatshirts',shackets:'Shackets',polo:'Polo Shirts',jeans:'Jeans'};
   var GROUPS={};
   var P=[
-    {id:1,name:'One Team One Dream Hoodie',type:'hoodies',price:750,old:990,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-one-team.jpg']]},
-    {id:2,name:'Dimension Print Hoodie',type:'hoodies',price:750,old:990,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-dimension.jpg']]},
-    {id:3,name:'Offline Graphic Hoodie',type:'hoodies',price:750,old:990,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-offline.jpg']]},
-    {id:4,name:'Polo Collar Sweatshirt',type:'sweatshirts',price:950,old:1250,tag:'Trending',sz:'top',note:'Premium quality, trending style',cols:[['Black','#14161D','img/sweat-black.jpg'],['White','#F3F1EA','img/sweat-white.jpg']]},
-    {id:5,name:'Hooded Corduroy Shacket',type:'shackets',price:1050,old:1390,tag:'New',sz:'top',note:'Premium fabrics, top-notch quality',cols:[['Pink','#D07AA0','img/shacket-pink.jpg'],['Lavender','#B9A3E3','img/shacket-lavender.jpg']]},
-    {id:6,name:'Full Sleeve Striped Polo T-Shirt',type:'polo',price:550,old:750,sz:'top',note:'95% cotton, 5% Lycra',cols:[['Mint Green','#A8CDB0','img/polo-stripe-mint.jpg'],['Berry Pink','#B5305F','img/polo-stripe-berry.jpg'],['Black','#1B1F2A','img/polo-stripe-black.jpg']]},
-    {id:7,name:'Full Sleeve Contrast Collar Polo',type:'polo',price:550,old:750,tag:'Best Seller',sz:'top',note:'95% cotton, 5% Lycra',cols:[['Black & Cream','#1A1C22','img/polo-collar-black.jpg'],['Forest Green','#1F4D3F','img/polo-collar-green.jpg']]}
+    {id:1,name:'One Team One Dream Hoodie',type:'hoodies',price:749,old:999,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-one-team.jpg']]},
+    {id:2,name:'Dimension Print Hoodie',type:'hoodies',price:749,old:999,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-dimension.jpg']]},
+    {id:3,name:'Offline Graphic Hoodie',type:'hoodies',price:749,old:999,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-offline.jpg']]},
+    {id:4,name:'Polo Collar Sweatshirt',type:'sweatshirts',price:949,old:1299,tag:'Trending',sz:'top',note:'Premium quality, trending style',cols:[['Black','#14161D','img/sweat-black.jpg'],['White','#F3F1EA','img/sweat-white.jpg']]},
+    {id:5,name:'Hooded Corduroy Shacket',type:'shackets',price:1049,old:1399,tag:'New',sz:'top',note:'Premium fabrics, top-notch quality',cols:[['Pink','#D07AA0','img/shacket-pink.jpg'],['Lavender','#B9A3E3','img/shacket-lavender.jpg']]},
+    {id:6,name:'Full Sleeve Striped Polo T-Shirt',type:'polo',price:549,old:799,sz:'top',note:'95% cotton, 5% Lycra',cols:[['Mint Green','#A8CDB0','img/polo-stripe-mint.jpg'],['Berry Pink','#B5305F','img/polo-stripe-berry.jpg'],['Black','#1B1F2A','img/polo-stripe-black.jpg']]},
+    {id:7,name:'Full Sleeve Contrast Collar Polo',type:'polo',price:549,old:799,tag:'Best Seller',sz:'top',note:'95% cotton, 5% Lycra',cols:[['Black & Cream','#1A1C22','img/polo-collar-black.jpg'],['Forest Green','#1F4D3F','img/polo-collar-green.jpg']]}
 ,
-    {id:8,name:'Baggy Jeans',type:'jeans',price:650,old:850,tag:'New',sz:'waist',note:'Premium quality',cols:[['Black','#16181F','img/jeans-black.jpg'],['Grey Acid Wash','#6A6C74','img/jeans-grey.jpg'],['Light Blue','#9CC8EA','img/jeans-lightblue.jpg']]}
+    {id:8,name:'Baggy Jeans',type:'jeans',price:649,old:899,tag:'New',sz:'waist',note:'Premium quality',cols:[['Black','#16181F','img/jeans-black.jpg'],['Grey Acid Wash','#6A6C74','img/jeans-grey.jpg'],['Light Blue','#9CC8EA','img/jeans-lightblue.jpg']]}
   ];
   var byId={};P.forEach(function(p){byId[p.id]=p});
 
@@ -618,9 +618,9 @@ footer .about{color:var(--foot-muted);max-width:21rem}
   }
   function buildPromos(){
     var ps=[
-      {key:'hoodies',id:3,c:'#14161D',h:'Trending Hoodies',t:'Premium fabric hoodies, only ৳750'},
-      {key:'shackets',id:5,c:'#D07AA0',h:'Winter Shackets',t:'Premium fabrics, top-notch quality, ৳1,050'},
-      {key:'polo',id:6,c:'#1F4D3F',h:'Full Sleeve Polos',t:'95% cotton, 5% Lycra, ৳550'}
+      {key:'hoodies',id:3,c:'#14161D',h:'Trending Hoodies',t:'Premium fabric hoodies, only ৳749'},
+      {key:'shackets',id:5,c:'#D07AA0',h:'Winter Shackets',t:'Premium fabrics, top-notch quality, ৳1,049'},
+      {key:'polo',id:6,c:'#1F4D3F',h:'Full Sleeve Polos',t:'95% cotton, 5% Lycra, ৳549'}
     ];
     $('#promos').innerHTML=ps.map(function(p){
       return '<button class="promo" data-act="filter" data-key="'+p.key+'"><div><h3>'+p.h+'</h3><p>'+p.t+'</p><span class="go">Shop now</span></div><span class="pimg" style="background-image:url(\''+byId[p.id].cols[0][2]+'\')"></span></button>';
