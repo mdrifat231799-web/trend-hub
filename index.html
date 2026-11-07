@@ -206,6 +206,23 @@ section.blk{padding-block:clamp(1.4rem,3.5vw,2.6rem)}
 .cartbtn{width:2.75rem;height:2.75rem;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;flex:none;transition:transform .15s,background .15s}
 .cartbtn:hover{background:var(--accent);color:var(--accent-ink);transform:scale(1.06)}
 
+/* photo layout */
+.pbg{position:absolute;inset:-24px;background-size:cover;background-position:center;filter:blur(20px) saturate(1.1)}
+img.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;display:block;transition:transform .25s}
+.card .tile{aspect-ratio:4/5;display:block}
+.card .tile::after{display:none}
+.card:hover img.photo,.ht:hover img.photo{transform:scale(1.03)}
+.tg,.wish{z-index:3}
+.ht{background:var(--tile)}
+.ht .tag{z-index:3}
+.cats{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+.cat .circ{position:relative;width:min(100%,160px);background-color:var(--tile);background-size:cover;background-position:center}
+.promo{background:var(--tile)}
+.promo .pimg{width:44%;max-width:170px;aspect-ratio:1;border-radius:14px;background-size:cover;background-position:center;flex:none;transition:transform .25s}
+.promo:hover .pimg{transform:scale(1.04)}
+.ln .tile img{width:100%;height:100%;object-fit:cover;border-radius:10px;display:block}
+.info .note{color:var(--muted);font-size:.84rem;line-height:1.4}
+.card .buy{margin-top:auto;padding-top:.3rem}
 /* perks */
 .perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:1rem}
 .perk{display:flex;gap:.9rem;align-items:flex-start;padding:1.1rem 1.2rem;background:var(--surface);border:1px solid var(--line);border-radius:14px}
@@ -369,7 +386,7 @@ footer .about{color:var(--foot-muted);max-width:21rem}
     <a class="logo" href="#top" aria-label="Trend Hub home"><span class="mk">TH</span><span class="nm">Trend Hub<small>Menswear</small></span></a>
     <form class="search" role="search" id="searchForm">
       <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></svg>
-      <input id="q" type="search" placeholder="Search hoodies, polo, punjabi…" aria-label="Search products" autocomplete="off">
+      <input id="q" type="search" placeholder="Search hoodies, shackets, polo…" aria-label="Search products" autocomplete="off">
     </form>
     <div class="acts">
       <button class="act" data-act="account" aria-label="Login or register">
@@ -397,11 +414,11 @@ footer .about{color:var(--foot-muted);max-width:21rem}
     <div class="wrap">
       <div>
         <p class="eyebrow">Winter Collection 2026</p>
-        <h1><mark>Menswear</mark> made for every day</h1>
-        <p class="lead">T-shirts, polos, shirts, hoodies, jackets and Punjabi in quality fabrics at fair prices. Delivered across Bangladesh with Cash on Delivery.</p>
+        <h1>Trending <mark>winter wear</mark>, premium quality</h1>
+        <p class="lead">Hoodies, sweatshirts, shackets and full sleeve polos in premium fabrics at honest prices. Delivered across Bangladesh with Cash on Delivery.</p>
         <div class="cta">
           <button class="btn pri" data-act="filter" data-key="all">Shop Collection</button>
-          <button class="btn sec" data-act="filter" data-key="sale">View Sale</button>
+          <button class="btn sec" data-act="filter" data-key="hoodies">Shop Hoodies</button>
         </div>
       </div>
       <div class="hv" id="heroTiles"></div>
@@ -432,7 +449,6 @@ footer .about{color:var(--foot-muted);max-width:21rem}
             <option value="pop">Popular</option>
             <option value="low">Price: Low to High</option>
             <option value="high">Price: High to Low</option>
-            <option value="off">Biggest Discount</option>
           </select>
         </label>
       </div>
@@ -471,11 +487,10 @@ footer .about{color:var(--foot-muted);max-width:21rem}
     <div>
       <h4>Shop</h4>
       <ul>
-        <li><button data-act="filter" data-key="tshirt">T-Shirts</button></li>
-        <li><button data-act="filter" data-key="polo">Polo Shirts</button></li>
-        <li><button data-act="filter" data-key="shirts">Shirts</button></li>
         <li><button data-act="filter" data-key="hoodies">Hoodies</button></li>
-        <li><button data-act="filter" data-key="punjabi">Punjabi</button></li>
+        <li><button data-act="filter" data-key="sweatshirts">Sweatshirts</button></li>
+        <li><button data-act="filter" data-key="shackets">Shackets</button></li>
+        <li><button data-act="filter" data-key="polo">Polo Shirts</button></li>
       </ul>
     </div>
     <div>
@@ -522,55 +537,25 @@ footer .about{color:var(--foot-muted);max-width:21rem}
   var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
   var money=function(n){return '৳ '+n.toLocaleString('en-IN')};
   var FREE_AT=2500;
-  var SIZES={top:['S','M','L','XL','XXL'],waist:['30','32','34','36','38']};
-  var TYPES={tshirt:'T-Shirts',polo:'Polo Shirts',shirts:'Shirts',hoodies:'Hoodies',sweatshirts:'Sweatshirts',jackets:'Jackets',puffer:'Puffer Jackets',coats:'Overcoats',joggers:'Joggers',trousers:'Trousers',shorts:'Shorts',punjabi:'Punjabi'};
-  var GROUPS={topwear:{label:'Topwear',types:['tshirt','polo','shirts']},winterwear:{label:'Winterwear',types:['hoodies','sweatshirts','jackets','puffer','coats']},bottomwear:{label:'Bottomwear',types:['joggers','trousers','shorts']}};
+  var SIZES={top:['M','L','XL','XXL']};
+  var TYPES={hoodies:'Hoodies',sweatshirts:'Sweatshirts',shackets:'Shackets',polo:'Polo Shirts'};
+  var GROUPS={};
   var P=[
-    {id:1,name:'Heavyweight Fleece Hoodie',type:'hoodies',price:1850,old:2400,c:'#2F5D4B',shape:'hoodie',tag:'Best Seller',sz:'top'},
-    {id:2,name:'Zip-Up Gym Hoodie',type:'hoodies',price:1650,old:2100,c:'#1F2937',shape:'hoodie',sz:'top'},
-    {id:3,name:'Crew Neck Sweatshirt',type:'sweatshirts',price:1350,old:1700,c:'#5C6B8A',shape:'sweat',sz:'top'},
-    {id:4,name:'Classic Pique Polo',type:'polo',price:750,old:950,c:'#1E3A8A',shape:'polo',tag:'Best Seller',sz:'top'},
-    {id:5,name:'Contrast Collar Polo',type:'polo',price:820,old:1050,c:'#0F766E',shape:'polo',sz:'top'},
-    {id:6,name:'Oversized Drop-Shoulder Tee',type:'tshirt',price:650,old:850,c:'#A37B55',shape:'tee',sz:'top'},
-    {id:7,name:'Combo Pack: 3 Plain T-Shirts',type:'tshirt',price:1350,old:1800,c:'#374151',shape:'tee',tag:'Combo',sz:'top'},
-    {id:8,name:'Printed Graphic Tee',type:'tshirt',price:590,old:790,c:'#D9623F',shape:'tee',sz:'top'},
-    {id:9,name:'Slim-Fit Oxford Shirt',type:'shirts',price:1450,old:1850,c:'#5B8DB8',shape:'shirt',sz:'top'},
-    {id:10,name:'Casual Check Shirt',type:'shirts',price:1250,old:1600,c:'#9A3B3B',shape:'shirt',sz:'top'},
-    {id:11,name:'Royal Check Punjabi',type:'punjabi',price:2500,old:null,c:'#7A1F2B',shape:'punjabi',tag:'New',sz:'top'},
-    {id:12,name:'Embroidered Cotton Punjabi',type:'punjabi',price:2950,old:3500,c:'#1D4E6B',shape:'punjabi',sz:'top'},
-    {id:13,name:'Bomber Fleece Jacket',type:'jackets',price:2650,old:3300,c:'#3F4A3C',shape:'jacket',sz:'top'},
-    {id:14,name:'Denim Trucker Jacket',type:'jackets',price:2850,old:null,c:'#2F4F7A',shape:'jacket',tag:'New',sz:'top'},
-    {id:15,name:'Cotton Terry Jogger',type:'joggers',price:980,old:1250,c:'#4B5563',shape:'jogger',sz:'top'},
-    {id:16,name:'Cargo Jogger Pants',type:'joggers',price:1350,old:1700,c:'#6B705C',shape:'jogger',sz:'top'},
-    {id:17,name:'Slim Chino Trousers',type:'trousers',price:1650,old:2100,c:'#B59A6D',shape:'pants',sz:'waist'},
-    {id:18,name:'Gabardine Formal Trousers',type:'trousers',price:1550,old:1950,c:'#27303F',shape:'pants',sz:'waist'},
-    {id:19,name:'Cotton Casual Shorts',type:'shorts',price:650,old:850,c:'#3A6EA5',shape:'shorts',sz:'waist'},
-    {id:20,name:'Gym Training Shorts',type:'shorts',price:580,old:750,c:'#161B2B',shape:'shorts',sz:'top'}
+    {id:1,name:'One Team One Dream Hoodie',type:'hoodies',price:750,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-one-team.jpg']]},
+    {id:2,name:'Dimension Print Hoodie',type:'hoodies',price:750,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-dimension.jpg']]},
+    {id:3,name:'Offline Graphic Hoodie',type:'hoodies',price:750,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-offline.jpg']]},
+    {id:4,name:'Polo Collar Sweatshirt',type:'sweatshirts',price:950,tag:'Trending',sz:'top',note:'Premium quality, trending style',cols:[['Black','#14161D','img/sweat-black.jpg'],['White','#F3F1EA','img/sweat-white.jpg']]},
+    {id:5,name:'Hooded Corduroy Shacket',type:'shackets',price:1050,tag:'New',sz:'top',note:'Premium fabrics, top-notch quality',cols:[['Pink','#D07AA0','img/shacket-pink.jpg'],['Lavender','#B9A3E3','img/shacket-lavender.jpg']]},
+    {id:6,name:'Full Sleeve Striped Polo T-Shirt',type:'polo',price:550,sz:'top',note:'95% cotton, 5% Lycra',cols:[['Mint Green','#A8CDB0','img/polo-stripe-mint.jpg'],['Berry Pink','#B5305F','img/polo-stripe-berry.jpg'],['Black','#1B1F2A','img/polo-stripe-black.jpg']]},
+    {id:7,name:'Full Sleeve Contrast Collar Polo',type:'polo',price:550,tag:'Best Seller',sz:'top',note:'95% cotton, 5% Lycra',cols:[['Black & Cream','#1A1C22','img/polo-collar-black.jpg'],['Forest Green','#1F4D3F','img/polo-collar-green.jpg']]}
   ];
-  P.push(
-    {id:21,name:'Quilted Puffer Jacket',type:'puffer',price:3450,old:4500,c:'#1F2937',shape:'puffer',tag:'New',sz:'top'},
-    {id:22,name:'Hooded Padded Jacket',type:'puffer',price:3250,old:4200,c:'#3F4A3C',shape:'puffer',sz:'top'},
-    {id:23,name:'Long Wool-Blend Overcoat',type:'coats',price:5450,old:6900,c:'#A37B55',shape:'coat',tag:'Best Seller',sz:'top'}
-  );
-  var NAMES={'#2F5D4B':'Forest Green','#1F2937':'Black','#5C6B8A':'Slate Blue','#1E3A8A':'Navy','#0F766E':'Teal','#A37B55':'Camel','#374151':'Charcoal','#D9623F':'Rust','#5B8DB8':'Sky Blue','#9A3B3B':'Brick Red','#7A1F2B':'Maroon','#1D4E6B':'Petrol Blue','#3F4A3C':'Olive','#2F4F7A':'Denim Blue','#4B5563':'Grey','#6B705C':'Moss','#B59A6D':'Khaki','#27303F':'Midnight','#3A6EA5':'Blue','#161B2B':'Black'};
-  var PAL=[['Black','#1A1D26'],['Navy','#1E3A8A'],['Olive','#4B5A3A'],['Maroon','#7A1F2B'],['Grey','#6B7280'],['Sand','#C2B08A']];
-  var byId={};
-  P.forEach(function(p){
-    byId[p.id]=p;
-    p.cols=[[NAMES[p.c]||'Original',p.c]];
-    for(var k=0;p.cols.length<3&&k<12;k++){
-      var v=PAL[(p.id+k)%PAL.length];
-      if(!p.cols.some(function(c){return c[0]===v[0]}))p.cols.push(v);
-    }
-  });
+  var byId={};P.forEach(function(p){byId[p.id]=p});
 
   var SPECIAL={
     all:{label:'All Products',fn:function(){return true}},
-    combo:{label:'Combo Offers',fn:function(p){return p.tag==='Combo'}},
-    sale:{label:'Sale',fn:function(p){return !!p.old}},
     wish:{label:'Wishlist',fn:function(p){return state.wish.indexOf(p.id)>-1}}
   };
-  var CHIPS=['all','tshirt','polo','shirts','hoodies','sweatshirts','jackets','puffer','coats','joggers','trousers','shorts','punjabi','combo','sale'];
+  var CHIPS=['all','hoodies','sweatshirts','shackets','polo'];
 
   var state={filter:'all',q:'',sort:'pop',cart:[],wish:[],sizes:{},colors:{}};
   try{
@@ -598,37 +583,39 @@ footer .about{color:var(--foot-muted);max-width:21rem}
   }
 
   /* static blocks */
+  function photo(src,alt,eager){return '<span class="pbg" style="background-image:url(\''+src+'\')"></span><img class="photo" src="'+src+'" alt="'+alt+'" '+(eager?'':'loading="lazy" ')+'decoding="async" width="800" height="800">'}
+  function setPhoto(card,src){
+    var bg=card.querySelector('.pbg'),im=card.querySelector('img.photo');
+    if(bg)bg.style.backgroundImage="url('"+src+"')";
+    if(im)im.src=src;
+  }
   function buildNav(){
-    var items=[{key:'all'},{key:'topwear',g:1},{key:'winterwear',g:1},{key:'bottomwear',g:1},{key:'punjabi'},{key:'combo'},{key:'sale',hot:true}];
+    var items=[{key:'all'},{key:'hoodies'},{key:'sweatshirts'},{key:'shackets'},{key:'polo'}];
     $('#nav').innerHTML=items.map(function(it){
-      var panel='';
-      if(it.g){
-        panel='<div class="panel">'+GROUPS[it.key].types.map(function(t){return '<button data-act="filter" data-key="'+t+'">'+TYPES[t]+'</button>'}).join('')+'<button class="all" data-act="filter" data-key="'+it.key+'">All '+GROUPS[it.key].label+'</button></div>';
-      }
-      return '<li><button class="nb'+(it.hot?' hot':'')+'" data-act="filter" data-key="'+it.key+'" data-nav="'+it.key+'">'+labelOf(it.key)+'</button>'+panel+'</li>';
+      return '<li><button class="nb" data-act="filter" data-key="'+it.key+'" data-nav="'+it.key+'">'+labelOf(it.key)+'</button></li>';
     }).join('');
   }
   function buildHero(){
-    var tiles=[{id:1,t:'Fleece Hoodie',key:'hoodies'},{id:4,t:'Pique Polo',key:'polo'},{id:11,t:'Check Punjabi',key:'punjabi'}];
+    var tiles=[{id:2,key:'hoodies',t:'Hoodies'},{id:5,key:'shackets',t:'Shackets'},{id:7,key:'polo',t:'Polo Shirts'}];
     $('#heroTiles').innerHTML=tiles.map(function(t){
       var p=byId[t.id];
-      return '<button class="ht tile" style="--c:'+p.c+'" data-act="filter" data-key="'+t.key+'">'+svg(p.shape)+'<span class="tag"><span>'+t.t+'</span><b>'+money(p.price)+'</b></span></button>';
+      return '<button class="ht" data-act="filter" data-key="'+t.key+'">'+photo(p.cols[0][2],p.name,true)+'<span class="tag"><span>'+t.t+'</span><b>From '+money(Math.min.apply(null,P.filter(function(x){return x.type===t.key}).map(function(x){return x.price})))+'</b></span></button>';
     }).join('');
   }
   function buildCats(){
-    var cs=[['tshirt','#A37B55','tee'],['polo','#1E3A8A','polo'],['shirts','#5B8DB8','shirt'],['hoodies','#2F5D4B','hoodie'],['joggers','#4B5563','jogger'],['punjabi','#7A1F2B','punjabi']];
+    var cs=[['hoodies',1],['sweatshirts',4],['shackets',5],['polo',7]];
     $('#cats').innerHTML=cs.map(function(c){
-      return '<button class="cat" data-act="filter" data-key="'+c[0]+'"><span class="circ tile" style="--c:'+c[1]+'">'+svg(c[2])+'</span>'+TYPES[c[0]]+'</button>';
+      return '<button class="cat" data-act="filter" data-key="'+c[0]+'"><span class="circ" style="background-image:url(\''+byId[c[1]].cols[0][2]+'\')"></span>'+TYPES[c[0]]+'</button>';
     }).join('');
   }
   function buildPromos(){
     var ps=[
-      {key:'combo',c:'#374151',shape:'tee',h:'Combo T-Shirts',t:'Three plain tees in one pack, from ৳1,350'},
-      {key:'punjabi',c:'#7A1F2B',shape:'punjabi',h:'Punjabi Collection',t:'New designs for weddings and festivals'},
-      {key:'winterwear',c:'#2F5D4B',shape:'hoodie',h:'Winterwear',t:'Hoodies, sweatshirts and jackets from ৳1,350'}
+      {key:'hoodies',id:3,c:'#14161D',h:'Trending Hoodies',t:'Premium fabric hoodies, only ৳750'},
+      {key:'shackets',id:5,c:'#D07AA0',h:'Winter Shackets',t:'Premium fabrics, top-notch quality, ৳1,050'},
+      {key:'polo',id:6,c:'#1F4D3F',h:'Full Sleeve Polos',t:'95% cotton, 5% Lycra, ৳550'}
     ];
     $('#promos').innerHTML=ps.map(function(p){
-      return '<button class="promo tile" style="--c:'+p.c+'" data-act="filter" data-key="'+p.key+'"><div><h3>'+p.h+'</h3><p>'+p.t+'</p><span class="go">Shop now</span></div>'+svg(p.shape)+'</button>';
+      return '<button class="promo" data-act="filter" data-key="'+p.key+'"><div><h3>'+p.h+'</h3><p>'+p.t+'</p><span class="go">Shop now</span></div><span class="pimg" style="background-image:url(\''+byId[p.id].cols[0][2]+'\')"></span></button>';
     }).join('');
   }
 
@@ -653,10 +640,7 @@ footer .about{color:var(--foot-muted);max-width:21rem}
     return list;
   }
   function colorOf(p){var n=state.colors[p.id];return p.cols.filter(function(c){return c[0]===n})[0]||p.cols[0]}
-  function hexOf(p,name){var c=p.cols.filter(function(c){return c[0]===name})[0];return c?c[1]:p.c}
-  var HANGER='<svg class="hang" viewBox="0 0 40 24" aria-hidden="true"><path d="M20 11V9c0-1.6 1.6-2.2 2.4-3.1A3.3 3.3 0 1 0 17 3.4M20 11 4 20h32z"/></svg>';
-  var BOLT='<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></svg>';
-  var NOHANG={jogger:1,pants:1,shorts:1};
+  function imgOf(p,name){var c=p.cols.filter(function(c){return c[0]===name})[0];return c?c[2]:p.cols[0][2]}
   function renderGrid(){
     var list=visible();
     $('#count').textContent=labelOf(state.filter)+' · '+list.length+(list.length===1?' item':' items');
@@ -667,20 +651,16 @@ footer .about{color:var(--foot-muted);max-width:21rem}
     $('#grid').innerHTML=list.map(function(p){
       var sel=state.sizes[p.id]||defSize(p);
       var col=colorOf(p);
-      var off=pct(p);
       var wished=state.wish.indexOf(p.id)>-1;
       return '<article class="card" data-card="'+p.id+'">'
-        +'<div class="tile" style="--c:'+col[1]+'">'
-        +(off?'<span class="tg off">-'+off+'%</span>':'')
-        +(p.tag?'<span class="tg'+(off?' second':'')+'">'+p.tag+'</span>':'')
+        +'<div class="tile">'
+        +(p.tag?'<span class="tg">'+p.tag+'</span>':'')
         +'<button class="wish" data-act="wish" data-id="'+p.id+'" aria-pressed="'+wished+'" aria-label="Add to wishlist"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>'
-        +(p.img?'<img class="photo" src="'+p.img+'" alt="'+p.name+'">':(NOHANG[p.shape]?'':HANGER)+svg(p.shape))
-        +(p.price>=FREE_AT?'<span class="fd">'+BOLT+'Free Delivery</span>':'')
-        +'<div class="sw" role="group" aria-label="Colour">'+p.cols.map(function(c){return '<button style="--sc:'+c[1]+'" data-act="color" data-id="'+p.id+'" data-name="'+c[0]+'" data-hex="'+c[1]+'" aria-pressed="'+(c[0]===col[0])+'" aria-label="'+c[0]+'" title="'+c[0]+'"></button>'}).join('')+'</div>'
-        +'</div><div class="info"><h3>'+p.name+'</h3>'
+        +photo(col[2],p.name+' in '+col[0])
+        +(p.cols.length>1?'<div class="sw" role="group" aria-label="Colour">'+p.cols.map(function(c){return '<button style="--sc:'+c[1]+'" data-act="color" data-id="'+p.id+'" data-name="'+c[0]+'" data-img="'+c[2]+'" aria-pressed="'+(c[0]===col[0])+'" aria-label="'+c[0]+'" title="'+c[0]+'"></button>'}).join('')+'</div>':'')
+        +'</div><div class="info"><h3>'+p.name+'</h3><p class="note">'+p.note+'</p>'
         +'<div class="sz" role="group" aria-label="Size">'+SIZES[p.sz].map(function(s){return '<button data-act="size" data-id="'+p.id+'" data-size="'+s+'" aria-pressed="'+(s===sel)+'">'+s+'</button>'}).join('')+'</div>'
-        +(p.old?'<span class="save">Save '+money(p.old-p.price)+'</span>':'')
-        +'<div class="buy"><div class="pr"><b>'+money(p.price)+'</b>'+(p.old?'<s>'+money(p.old)+'</s>':'')+'</div>'
+        +'<div class="buy"><div class="pr"><b>'+money(p.price)+'</b></div>'
         +'<button class="cartbtn" data-act="add" data-id="'+p.id+'" aria-label="Add '+p.name+' to cart"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.5l2 11h10l2-8H7M12 7v5M9.5 9.5h5"/><circle cx="9" cy="19" r="1.2"/><circle cx="17" cy="19" r="1.2"/></svg></button></div>'
         +'</div></article>';
     }).join('');
@@ -715,7 +695,7 @@ footer .about{color:var(--foot-muted);max-width:21rem}
     foot.hidden=false;
     box.innerHTML=state.cart.map(function(l,i){
       var p=byId[l.id],cn=l.color||p.cols[0][0];
-      return '<div class="ln"><div class="tile" style="--c:'+hexOf(p,cn)+'">'+svg(p.shape)+'</div>'
+      return '<div class="ln"><div class="tile"><img src="'+imgOf(p,cn)+'" alt=""></div>'
         +'<div><h3>'+p.name+'</h3><p class="m">'+cn+' · Size '+l.size+' · '+money(p.price)+'</p>'
         +'<div class="qty"><button data-act="qty" data-i="'+i+'" data-d="-1" aria-label="Decrease quantity">−</button><span>'+l.qty+'</span><button data-act="qty" data-i="'+i+'" data-d="1" aria-label="Increase quantity">+</button></div></div>'
         +'<div class="rt"><span>'+money(p.price*l.qty)+'</span><button class="rm" data-act="rm" data-i="'+i+'">Remove</button></div></div>';
@@ -760,7 +740,7 @@ footer .about{color:var(--foot-muted);max-width:21rem}
     else if(act==='color'){
       state.colors[id]=el.getAttribute('data-name');
       var card=el.closest('.card');
-      card.querySelector('.tile').style.setProperty('--c',el.getAttribute('data-hex'));
+      setPhoto(card,el.getAttribute('data-img'));
       $$('[data-act="color"]',card).forEach(function(b){b.setAttribute('aria-pressed',String(b===el))});
     }
     else if(act==='size'){
