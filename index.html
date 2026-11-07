@@ -215,7 +215,7 @@ img.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-
 .tg,.wish{z-index:3}
 .ht{background:var(--tile)}
 .ht .tag{z-index:3}
-.cats{grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+.cats{grid-template-columns:repeat(5,minmax(0,1fr));gap:.8rem}
 .cat .circ{position:relative;width:min(100%,160px);background-color:var(--tile);background-size:cover;background-position:center}
 .promo{background:var(--tile)}
 .promo .pimg{width:44%;max-width:170px;aspect-ratio:1;border-radius:14px;background-size:cover;background-position:center;flex:none;transition:transform .25s}
@@ -223,6 +223,10 @@ img.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-
 .ln .tile img{width:100%;height:100%;object-fit:cover;border-radius:10px;display:block}
 .info .note{color:var(--muted);font-size:.84rem;line-height:1.4}
 .card .buy{margin-top:auto;padding-top:.3rem}
+.wa{position:fixed;right:max(1rem,env(safe-area-inset-right,0px));bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:50;display:inline-flex;align-items:center;gap:.5rem;min-height:3rem;padding:0 1.1rem;border-radius:999px;background:#128C4A;color:#fff;font-weight:600;font-size:.95rem;box-shadow:var(--shadow);text-decoration:none}
+.wa:hover{filter:brightness(1.1)}
+footer a{color:inherit;text-decoration:none}
+footer a:hover{color:var(--hi);text-decoration:underline}
 /* perks */
 .perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:1rem}
 .perk{display:flex;gap:.9rem;align-items:flex-start;padding:1.1rem 1.2rem;background:var(--surface);border:1px solid var(--line);border-radius:14px}
@@ -449,6 +453,7 @@ footer .about{color:var(--foot-muted);max-width:21rem}
             <option value="pop">Popular</option>
             <option value="low">Price: Low to High</option>
             <option value="high">Price: High to Low</option>
+            <option value="off">Biggest Discount</option>
           </select>
         </label>
       </div>
@@ -462,7 +467,7 @@ footer .about{color:var(--foot-muted);max-width:21rem}
         <div class="perk"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><div><b>Nationwide Delivery</b><span>Courier delivery to every district in Bangladesh</span></div></div>
         <div class="perk"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg><div><b>Cash on Delivery</b><span>Pay when you receive your order, or use bKash / Nagad</span></div></div>
         <div class="perk"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h13l-3-3M20 15H7l3 3"/></svg><div><b>Easy Exchange</b><span>Wrong size? Exchange it for the right one</span></div></div>
-        <div class="perk"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><div><b>Chat Support</b><span>Order and get help on Messenger or WhatsApp</span></div></div>
+        <div class="perk"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><div><b>Chat Support</b><span>Order and get help on WhatsApp</span></div></div>
       </div>
     </div>
   </section>
@@ -491,6 +496,7 @@ footer .about{color:var(--foot-muted);max-width:21rem}
         <li><button data-act="filter" data-key="sweatshirts">Sweatshirts</button></li>
         <li><button data-act="filter" data-key="shackets">Shackets</button></li>
         <li><button data-act="filter" data-key="polo">Polo Shirts</button></li>
+        <li><button data-act="filter" data-key="jeans">Jeans</button></li>
       </ul>
     </div>
     <div>
@@ -505,10 +511,9 @@ footer .about{color:var(--foot-muted);max-width:21rem}
     <div>
       <h4>Contact</h4>
       <ul class="ph">
-        <li>Phone / WhatsApp: 01XXX-XXXXXX</li>
-        <li>Email: your-email@example.com</li>
-        <li>Address: Your shop address, Dhaka</li>
-        <li>Facebook · Instagram · YouTube</li>
+        <li>Phone / WhatsApp: <a href="https://wa.me/8801791092161" target="_blank" rel="noopener">01791-092161</a></li>
+        <li>Email: <a href="mailto:trendhub15250@gmail.com">trendhub15250@gmail.com</a></li>
+        <li>Cash on Delivery all over Bangladesh</li>
       </ul>
     </div>
     <div>
@@ -526,9 +531,10 @@ footer .about{color:var(--foot-muted);max-width:21rem}
   <div class="df" id="dfoot" hidden>
     <div class="free" id="free"></div>
     <div class="tot"><span>Subtotal</span><span id="sub">৳ 0</span></div>
-    <button class="btn pri" data-act="checkout">Confirm Order</button>
+    <button class="btn pri" data-act="checkout">Order on WhatsApp</button>
   </div>
 </aside>
+<a class="wa" href="https://wa.me/8801791092161?text=Hello%20Trend%20Hub%2C%20I%20want%20to%20order" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8.2 18.8z"/></svg><span>WhatsApp</span></a>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -537,17 +543,19 @@ footer .about{color:var(--foot-muted);max-width:21rem}
   var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
   var money=function(n){return '৳ '+n.toLocaleString('en-IN')};
   var FREE_AT=2500;
-  var SIZES={top:['M','L','XL','XXL']};
-  var TYPES={hoodies:'Hoodies',sweatshirts:'Sweatshirts',shackets:'Shackets',polo:'Polo Shirts'};
+  var SIZES={top:['M','L','XL','XXL'],waist:['28','30','32','34','36']};
+  var TYPES={hoodies:'Hoodies',sweatshirts:'Sweatshirts',shackets:'Shackets',polo:'Polo Shirts',jeans:'Jeans'};
   var GROUPS={};
   var P=[
-    {id:1,name:'One Team One Dream Hoodie',type:'hoodies',price:750,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-one-team.jpg']]},
-    {id:2,name:'Dimension Print Hoodie',type:'hoodies',price:750,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-dimension.jpg']]},
-    {id:3,name:'Offline Graphic Hoodie',type:'hoodies',price:750,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-offline.jpg']]},
-    {id:4,name:'Polo Collar Sweatshirt',type:'sweatshirts',price:950,tag:'Trending',sz:'top',note:'Premium quality, trending style',cols:[['Black','#14161D','img/sweat-black.jpg'],['White','#F3F1EA','img/sweat-white.jpg']]},
-    {id:5,name:'Hooded Corduroy Shacket',type:'shackets',price:1050,tag:'New',sz:'top',note:'Premium fabrics, top-notch quality',cols:[['Pink','#D07AA0','img/shacket-pink.jpg'],['Lavender','#B9A3E3','img/shacket-lavender.jpg']]},
-    {id:6,name:'Full Sleeve Striped Polo T-Shirt',type:'polo',price:550,sz:'top',note:'95% cotton, 5% Lycra',cols:[['Mint Green','#A8CDB0','img/polo-stripe-mint.jpg'],['Berry Pink','#B5305F','img/polo-stripe-berry.jpg'],['Black','#1B1F2A','img/polo-stripe-black.jpg']]},
-    {id:7,name:'Full Sleeve Contrast Collar Polo',type:'polo',price:550,tag:'Best Seller',sz:'top',note:'95% cotton, 5% Lycra',cols:[['Black & Cream','#1A1C22','img/polo-collar-black.jpg'],['Forest Green','#1F4D3F','img/polo-collar-green.jpg']]}
+    {id:1,name:'One Team One Dream Hoodie',type:'hoodies',price:750,old:990,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-one-team.jpg']]},
+    {id:2,name:'Dimension Print Hoodie',type:'hoodies',price:750,old:990,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-dimension.jpg']]},
+    {id:3,name:'Offline Graphic Hoodie',type:'hoodies',price:750,old:990,tag:'Trending',sz:'top',note:'Premium fabric, premium quality',cols:[['Black','#14161D','img/hoodie-offline.jpg']]},
+    {id:4,name:'Polo Collar Sweatshirt',type:'sweatshirts',price:950,old:1250,tag:'Trending',sz:'top',note:'Premium quality, trending style',cols:[['Black','#14161D','img/sweat-black.jpg'],['White','#F3F1EA','img/sweat-white.jpg']]},
+    {id:5,name:'Hooded Corduroy Shacket',type:'shackets',price:1050,old:1390,tag:'New',sz:'top',note:'Premium fabrics, top-notch quality',cols:[['Pink','#D07AA0','img/shacket-pink.jpg'],['Lavender','#B9A3E3','img/shacket-lavender.jpg']]},
+    {id:6,name:'Full Sleeve Striped Polo T-Shirt',type:'polo',price:550,old:750,sz:'top',note:'95% cotton, 5% Lycra',cols:[['Mint Green','#A8CDB0','img/polo-stripe-mint.jpg'],['Berry Pink','#B5305F','img/polo-stripe-berry.jpg'],['Black','#1B1F2A','img/polo-stripe-black.jpg']]},
+    {id:7,name:'Full Sleeve Contrast Collar Polo',type:'polo',price:550,old:750,tag:'Best Seller',sz:'top',note:'95% cotton, 5% Lycra',cols:[['Black & Cream','#1A1C22','img/polo-collar-black.jpg'],['Forest Green','#1F4D3F','img/polo-collar-green.jpg']]}
+,
+    {id:8,name:'Baggy Jeans',type:'jeans',price:650,old:850,tag:'New',sz:'waist',note:'Premium quality',cols:[['Black','#16181F','img/jeans-black.jpg'],['Grey Acid Wash','#6A6C74','img/jeans-grey.jpg'],['Light Blue','#9CC8EA','img/jeans-lightblue.jpg']]}
   ];
   var byId={};P.forEach(function(p){byId[p.id]=p});
 
@@ -555,7 +563,7 @@ footer .about{color:var(--foot-muted);max-width:21rem}
     all:{label:'All Products',fn:function(){return true}},
     wish:{label:'Wishlist',fn:function(p){return state.wish.indexOf(p.id)>-1}}
   };
-  var CHIPS=['all','hoodies','sweatshirts','shackets','polo'];
+  var CHIPS=['all','hoodies','sweatshirts','shackets','polo','jeans'];
 
   var state={filter:'all',q:'',sort:'pop',cart:[],wish:[],sizes:{},colors:{}};
   try{
@@ -590,7 +598,7 @@ footer .about{color:var(--foot-muted);max-width:21rem}
     if(im)im.src=src;
   }
   function buildNav(){
-    var items=[{key:'all'},{key:'hoodies'},{key:'sweatshirts'},{key:'shackets'},{key:'polo'}];
+    var items=[{key:'all'},{key:'hoodies'},{key:'sweatshirts'},{key:'shackets'},{key:'polo'},{key:'jeans'}];
     $('#nav').innerHTML=items.map(function(it){
       return '<li><button class="nb" data-act="filter" data-key="'+it.key+'" data-nav="'+it.key+'">'+labelOf(it.key)+'</button></li>';
     }).join('');
@@ -603,7 +611,7 @@ footer .about{color:var(--foot-muted);max-width:21rem}
     }).join('');
   }
   function buildCats(){
-    var cs=[['hoodies',1],['sweatshirts',4],['shackets',5],['polo',7]];
+    var cs=[['hoodies',1],['sweatshirts',4],['shackets',5],['polo',7],['jeans',8]];
     $('#cats').innerHTML=cs.map(function(c){
       return '<button class="cat" data-act="filter" data-key="'+c[0]+'"><span class="circ" style="background-image:url(\''+byId[c[1]].cols[0][2]+'\')"></span>'+TYPES[c[0]]+'</button>';
     }).join('');
@@ -652,15 +660,16 @@ footer .about{color:var(--foot-muted);max-width:21rem}
       var sel=state.sizes[p.id]||defSize(p);
       var col=colorOf(p);
       var wished=state.wish.indexOf(p.id)>-1;
+      var off=pct(p);
       return '<article class="card" data-card="'+p.id+'">'
         +'<div class="tile">'
-        +(p.tag?'<span class="tg">'+p.tag+'</span>':'')
+        +(off?'<span class="tg off">-'+off+'%</span>':'')+(p.tag?'<span class="tg'+(off?' second':'')+'">'+p.tag+'</span>':'')
         +'<button class="wish" data-act="wish" data-id="'+p.id+'" aria-pressed="'+wished+'" aria-label="Add to wishlist"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>'
         +photo(col[2],p.name+' in '+col[0])
         +(p.cols.length>1?'<div class="sw" role="group" aria-label="Colour">'+p.cols.map(function(c){return '<button style="--sc:'+c[1]+'" data-act="color" data-id="'+p.id+'" data-name="'+c[0]+'" data-img="'+c[2]+'" aria-pressed="'+(c[0]===col[0])+'" aria-label="'+c[0]+'" title="'+c[0]+'"></button>'}).join('')+'</div>':'')
         +'</div><div class="info"><h3>'+p.name+'</h3><p class="note">'+p.note+'</p>'
         +'<div class="sz" role="group" aria-label="Size">'+SIZES[p.sz].map(function(s){return '<button data-act="size" data-id="'+p.id+'" data-size="'+s+'" aria-pressed="'+(s===sel)+'">'+s+'</button>'}).join('')+'</div>'
-        +'<div class="buy"><div class="pr"><b>'+money(p.price)+'</b></div>'
+        +(p.old?'<span class="save">Save '+money(p.old-p.price)+'</span>':'')+'<div class="buy"><div class="pr"><b>'+money(p.price)+'</b>'+(p.old?'<s>'+money(p.old)+'</s>':'')+'</div>'
         +'<button class="cartbtn" data-act="add" data-id="'+p.id+'" aria-label="Add '+p.name+' to cart"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.5l2 11h10l2-8H7M12 7v5M9.5 9.5h5"/><circle cx="9" cy="19" r="1.2"/><circle cx="17" cy="19" r="1.2"/></svg></button></div>'
         +'</div></article>';
     }).join('');
@@ -769,7 +778,11 @@ footer .about{color:var(--foot-muted);max-width:21rem}
       save();renderCounts(false);renderCart();
     }
     else if(act==='rm'){state.cart.splice(Number(el.getAttribute('data-i')),1);save();renderCounts(false);renderCart()}
-    else if(act==='checkout'){toast('Checkout and payment will work once the backend is connected')}
+    else if(act==='checkout'){
+      var ol=state.cart.map(function(l){var p=byId[l.id];return '\u2022 '+p.name+' ('+(l.color||p.cols[0][0])+', '+l.size+') x '+l.qty+' = '+money(p.price*l.qty)});
+      var msg='Hello Trend Hub, I want to order:\n'+ol.join('\n')+'\nSubtotal: '+money(subtotal())+'\nPlease confirm the delivery charge. My name and address:';
+      window.open('https://wa.me/8801791092161?text='+encodeURIComponent(msg),'_blank','noopener');
+    }
     else if(act==='account'){toast('Login will work once the backend is connected')}
     else if(act==='toast'){toast(el.getAttribute('data-msg'))}
     else if(act==='goto'){goto(el.getAttribute('data-target'))}
